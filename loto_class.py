@@ -43,7 +43,7 @@ class Card:
 
     # проверка все ли числа в карточке зачеркнуты
     def closed(self):
-        answer = len(self.spisok_num) == 0
+        answer = len(self.spisok_num)
         return answer
 
     # вывод карточки
@@ -88,16 +88,16 @@ class Game:
 
         return 0
 
-if __name__ == "__main__":
-    # card = Card()
-    # card.create_card(card.spisok_num)
-
-    game = Game()
-    while True:
-        score = game.play_round()
-        if score == 1:
-            print("Вы выиграли! Поздравляем")
-            break
-        elif score == 2:
-            print("К сожалению вы проиграли :(")
-            break
+# if __name__ == "__main__":
+#     # card = Card()
+#     # card.create_card(card.spisok_num)
+#
+#     game = Game()
+#     while True:
+#         score = game.play_round()
+#         if score == 1:
+#             print("Вы выиграли! Поздравляем")
+#             break
+#         elif score == 2:
+#             print("К сожалению вы проиграли :(")
+#             break
