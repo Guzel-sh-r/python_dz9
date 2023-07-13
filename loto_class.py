@@ -1,12 +1,5 @@
 import random
 
-# Генерация мешка с бочонками
-def generate_kegs():
-    kegs = []
-    [kegs.append(i) for i in range(1, 91)]
-    random.shuffle(kegs)
-    return kegs
-
 
 # Карточка с цифрами
 class Card:
@@ -47,7 +40,7 @@ class Card:
         return answer
 
     # вывод карточки
-    def print_card(self):
+    def __str__(self):
         s = ''
         for item in self.card_nums:
             for num in item:
@@ -56,25 +49,37 @@ class Card:
                     s += " "
             s += "\n"
         return s
+
+    # просто чтобы было по заданию
+    def __eq__(self, other):
+        return len(self.spisok_num) == len(other) and self.spisok_num == other
+
 # Игра
 class Game:
+
+    # Генерация мешка с бочонками
+    @staticmethod
+    def generate_kegs():
+        kegs = []
+        [kegs.append(i) for i in range(1, 91)]
+        random.shuffle(kegs)
+        return kegs
 
     def __init__(self):
         self.usercard = Card()
         self.compcard = Card()
-        self.kegs = generate_kegs()
+        self.kegs = Game.generate_kegs()
 
     # вытаскивается бочонок из мешка
     def play_round(self):
         keg = self.kegs.pop()
-        print(f"Новый бочонок: {keg} (осталось {len(self.kegs)})\n")
-        print(f"----- Ваша карточка ------\n{self.usercard.print_card()}")
-        print(f"-- Карточка компьютера ---\n{self.compcard.print_card()}")
+        print(f"Новый бочонок: {keg} {Game}")
+        print(f"----- Ваша карточка ------\n{self.usercard}")
+        print(f"-- Карточка компьютера ---\n{self.compcard}")
 
         answer = input("Зачеркнуть цифру? (да/нет) ").lower().strip()
         if (answer == "да" and not keg in self.usercard.spisok_num) or (answer != "да" and keg in self.usercard.spisok_num):
             return 2
-
 
         if keg in self.usercard.spisok_num:
             self.usercard.cross_num(keg)
@@ -89,8 +94,6 @@ class Game:
         return 0
 
 # if __name__ == "__main__":
-#     # card = Card()
-#     # card.create_card(card.spisok_num)
 #
 #     game = Game()
 #     while True:
