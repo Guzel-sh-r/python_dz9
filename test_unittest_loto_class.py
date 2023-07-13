@@ -29,9 +29,12 @@ class TestCard(unittest.TestCase):
         spisok_num = []
         self.assertFalse(len(spisok_num))
 
-    def test_print_card(self):
-        pass
+    def test_str(self):
+        self.assertIsInstance(self.card.spisok_num, list)
 
+    def test_eq(self):
+        other = []
+        self.assertFalse(other)
 
 class TestGame(unittest.TestCase):
     def setUp(self):
@@ -39,9 +42,9 @@ class TestGame(unittest.TestCase):
         self.compcard = loto_class.Card()
 
     def test_init(self):
-        self.assertEqual(len(loto_class.generate_kegs()), 90)
-        self.assertIsInstance(loto_class.generate_kegs(), list)
-        self.kegs = loto_class.generate_kegs()
+        self.assertEqual(len(loto_class.Game.generate_kegs()), 90)
+        self.assertIsInstance(loto_class.Game.generate_kegs(), list)
+        self.kegs = loto_class.Game.generate_kegs()
         self.assertEqual(len(self.kegs), 90)
         self.assertIsInstance(self.kegs, list)
 
